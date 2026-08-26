@@ -1,0 +1,32 @@
+{
+  "name": "unuser",
+  "version": "0.1.0",
+  "description": "SOL perpetuals with no user accounts: zero-knowledge notes for the money, Arcium MPC for the positions",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test:circuit": "ts-mocha -p ./tsconfig.json -t 600000 --exit tests/circuit.ts",
+    "test:notes": "bash scripts/test-notes.sh",
+    "test": "arcium test",
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w"
+  },
+  "dependencies": {
+    "@anchor-lang/core": "^1.0.2",
+    "@arcium-hq/client": "0.15.0",
+    "circomlib": "2.0.5",
+    "circomlibjs": "0.1.7",
+    "snarkjs": "0.7.6"
+  },
+  "devDependencies": {
+    "@solana/spl-token": "0.4.9",
+    "@types/bn.js": "^5.1.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3",
+    "prettier": "^2.6.2",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.7.3"
+  }
+}
