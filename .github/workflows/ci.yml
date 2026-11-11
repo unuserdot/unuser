@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  circuit:
+    # Compiles the spend circuit, runs a throwaway local setup and checks that honest spends prove and
+    # everything else does not. The on-chain tests need a Solana validator and an Arcium cluster and are
+    # run locally (see README, "Build and test").
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: yarn
+      - name: Install circom 2.2.3
+        run: |
+          curl -sSfL -o circom https://github.com/iden3/circom/releases/download/v2.2.3/circom-linux-amd64
+          chmod +x circom
+          sudo mv circom /usr/local/bin/circom
+      - run: yarn install --frozen-lockfile
+      - run: bash scripts/setup-circuit.sh
+      - run: yarn test:circuit
